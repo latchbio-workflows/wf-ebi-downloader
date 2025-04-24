@@ -1,0 +1,162 @@
+Step 1/14 : from 812206152185.dkr.ecr.us-west-2.amazonaws.com/latch-base:cb01-main
+
+
+ ---> 507607c2b5ea
+
+Step 2/14 : workdir /tmp/docker-build/work/
+
+
+ ---> Using cache
+
+ ---> 3b5eb2da1ce3
+
+Step 3/14 : shell [     "/usr/bin/env", "bash",     "-o", "errexit",     "-o", "pipefail",     "-o", "nounset",     "-o", "verbose",     "-o", "errtrace",     "-O", "inherit_errexit",     "-O", "shift_verbose",     "-c" ]
+
+
+ ---> Using cache
+
+ ---> 2af6bafaff25
+
+Step 4/14 : env TZ='Etc/UTC'
+
+
+ ---> Using cache
+
+ ---> 5b7579be9ce0
+
+Step 5/14 : env LANG='en_US.UTF-8'
+
+
+ ---> Using cache
+
+ ---> 5740eabe5ff3
+
+Step 6/14 : arg DEBIAN_FRONTEND=noninteractive
+
+
+ ---> Using cache
+
+ ---> 6aedbe938026
+
+Step 7/14 : run pip install latch==2.59.1
+
+
+ ---> Using cache
+
+ ---> fd81232acda7
+
+Step 8/14 : run mkdir /opt/latch
+
+
+ ---> Using cache
+
+ ---> 434bd366dec3
+
+Step 9/14 : run apt-get update && apt-get install -y wget
+
+
+ ---> Running in b07efd5bd121
+
+[91mapt-get update && apt-get install -y wget
+[0m
+Get:1 https://download.docker.com/linux/debian bookworm InRelease [47.0 kB]
+
+Get:2 http://deb.debian.org/debian bookworm InRelease [151 kB]
+
+Get:3 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+
+Get:4 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+
+Get:5 https://download.docker.com/linux/debian bookworm/stable amd64 Packages [39.7 kB]
+
+Get:6 http://deb.debian.org/debian bookworm/main amd64 Packages [8792 kB]
+
+Get:7 http://deb.debian.org/debian bookworm-updates/main amd64 Packages.diff/Index [16.2 kB]
+
+Get:8 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [260 kB]
+
+Get:9 http://deb.debian.org/debian bookworm-updates/main amd64 Packages T-2025-03-27-1414.15-F-2025-01-14-2009.05.pdiff [187 B]
+
+Get:9 http://deb.debian.org/debian bookworm-updates/main amd64 Packages T-2025-03-27-1414.15-F-2025-01-14-2009.05.pdiff [187 B]
+
+Fetched 9410 kB in 1s (6337 kB/s)
+Reading package lists...
+
+
+Reading package lists...
+
+
+Building dependency tree...
+
+Reading state information...
+
+
+The following NEW packages will be installed:
+  wget
+
+0 upgraded, 1 newly installed, 0 to remove and 45 not upgraded.
+Need to get 937 kB of archives.
+After this operation, 3606 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 wget amd64 1.21.3-1+deb12u1 [937 kB]
+
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0m
+Fetched 937 kB in 0s (13.4 MB/s)
+
+Selecting previously unselected package wget.
+(Reading database ... 
+(Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%(Reading database ... 95%
+(Reading database ... 100%(Reading database ... 21788 files and directories currently installed.)
+
+Preparing to unpack .../wget_1.21.3-1+deb12u1_amd64.deb ...
+
+Unpacking wget (1.21.3-1+deb12u1) ...
+
+Setting up wget (1.21.3-1+deb12u1) ...
+
+ ---> 982733cec6f9
+
+Step 10/14 : copy . /root/
+
+
+ ---> 4cfc9f228961
+
+Step 11/14 : run chmod +x /root/wf/query_fastqs.sh
+
+
+ ---> Running in 775b2c7964d4
+
+[91mchmod +x /root/wf/query_fastqs.sh
+[0m
+ ---> daf398c1c028
+
+Step 12/14 : arg tag
+
+
+ ---> Running in 71c4a7f3e05d
+
+ ---> f2543ca3bf58
+
+Step 13/14 : env FLYTE_INTERNAL_IMAGE $tag
+
+
+ ---> Running in e6593fd399b0
+
+ ---> 8551d49cde08
+
+Step 14/14 : workdir /root
+
+
+ ---> Running in 79b315489d52
+
+ ---> 58b62b13f50c
+
+Successfully built 58b62b13f50c
+
+Successfully tagged 812206152185.dkr.ecr.us-west-2.amazonaws.com/35446_wf_init_ebi_download_workflow:0.0.2-f9cf6b
+

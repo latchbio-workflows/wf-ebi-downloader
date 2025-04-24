@@ -1,0 +1,100 @@
+Step 1/14 : from 812206152185.dkr.ecr.us-west-2.amazonaws.com/latch-base:cb01-main
+
+
+ ---> 507607c2b5ea
+
+Step 2/14 : workdir /tmp/docker-build/work/
+
+
+ ---> Using cache
+
+ ---> 3b5eb2da1ce3
+
+Step 3/14 : shell [     "/usr/bin/env", "bash",     "-o", "errexit",     "-o", "pipefail",     "-o", "nounset",     "-o", "verbose",     "-o", "errtrace",     "-O", "inherit_errexit",     "-O", "shift_verbose",     "-c" ]
+
+
+ ---> Using cache
+
+ ---> 2af6bafaff25
+
+Step 4/14 : env TZ='Etc/UTC'
+
+
+ ---> Using cache
+
+ ---> 5b7579be9ce0
+
+Step 5/14 : env LANG='en_US.UTF-8'
+
+
+ ---> Using cache
+
+ ---> 5740eabe5ff3
+
+Step 6/14 : arg DEBIAN_FRONTEND=noninteractive
+
+
+ ---> Using cache
+
+ ---> 6aedbe938026
+
+Step 7/14 : run pip install latch==2.59.1
+
+
+ ---> Using cache
+
+ ---> fd81232acda7
+
+Step 8/14 : run mkdir /opt/latch
+
+
+ ---> Using cache
+
+ ---> 434bd366dec3
+
+Step 9/14 : run apt-get update && apt-get install -y wget
+
+
+ ---> Using cache
+
+ ---> 982733cec6f9
+
+Step 10/14 : copy . /root/
+
+
+ ---> c01e9b88f1d3
+
+Step 11/14 : run chmod +x /root/wf/query_fastqs.sh
+
+
+ ---> Running in 4e131750fd17
+
+[91mchmod +x /root/wf/query_fastqs.sh
+[0m
+ ---> abd712012fca
+
+Step 12/14 : arg tag
+
+
+ ---> Running in 1d2075d68a96
+
+ ---> 5cd32732d9f0
+
+Step 13/14 : env FLYTE_INTERNAL_IMAGE $tag
+
+
+ ---> Running in 311e4986bbef
+
+ ---> 22367ba6bca8
+
+Step 14/14 : workdir /root
+
+
+ ---> Running in 84b7a92a73f6
+
+ ---> 8591b0230734
+
+Successfully built 8591b0230734
+
+Successfully tagged 812206152185.dkr.ecr.us-west-2.amazonaws.com/35446_wf_init_ebi_download_workflow:0.0.2-cdd817
+
