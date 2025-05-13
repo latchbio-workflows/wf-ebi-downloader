@@ -19,4 +19,11 @@ curl -s "https://www.ebi.ac.uk/ena/portal/api/filereport?accession=${PROJECT_ID}
       print $1 "\t" forward "\t" reverse
   }' > fastqs.tsv
 
-echo "Generated fastqs.tsv for project ${PROJECT_ID}"
+ROW_COUNT=$(wc -l < fastqs.tsv)
+
+if [ "$ROW_COUNT" -eq 0 ]; then
+  echo "Error: No FASTQ entries found for project ${PROJECT_ID}."
+  exit 1
+fi
+
+echo "Generated fastqs.tsv with ${ROW_COUNT} entries for project ${PROJECT_ID}"

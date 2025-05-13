@@ -23,12 +23,13 @@ arg DEBIAN_FRONTEND=noninteractive
 # Latch SDK
 # DO NOT REMOVE
 run pip install latch==2.59.1
-run mkdir /opt/latch
 run apt-get update && apt-get install -y wget
+run mkdir /opt/latch
 
 # Copy workflow data (use .dockerignore to skip files)
 copy . /root/
 run chmod +x /root/wf/query_fastqs.sh
+
 # Epilogue
 
 # Latch workflow registration metadata

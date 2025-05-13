@@ -33,7 +33,10 @@ def preprocess_task(
         )
         print("Script output:\n", result.stdout)
     except subprocess.CalledProcessError as e:
-        print("Error occurred:\n", e.stderr)
+        print(
+            "Error occurred:\nYour sample list might be empty. This could mean that no public data has been made available for this project yet. Please double-check the Project ID on the EBI website.\n",
+            e.stderr,
+        )
 
     """Preprocesses input data and creates a list of Sample objects."""
     sample_sets = []
@@ -42,7 +45,8 @@ def preprocess_task(
         reader = csv.reader(f, delimiter="\t")
         for row in reader:
             sample_id, fwd_url, rev_url = row
-            if fwd_url and rev_url:
+
+            if fwd_url or rev_url:
                 sample_sets.append(
                     Sample(
                         identifier=sample_id,
@@ -52,7 +56,9 @@ def preprocess_task(
                     )
                 )
 
-    print(sample_sets)
+    print(f"List of samples to be downloaded: {sample_sets}")
+    if not sample_sets:
+        raise ValueError("No valid sample pairs found — sample_sets is empty.")
 
     return sample_sets
 
@@ -63,17 +69,19 @@ def download_task(sample: Sample) -> LatchOutputDir:
     Path(output_path).mkdir(parents=True, exist_ok=True)
 
     try:
-        print(f"Downloading forward read for {sample.identifier}...")
-        subprocess.run(
-            ["wget", "-nc", "-P", output_path, sample.forward_read], check=True
-        )
+        if sample.forward_read:
+            print(f"Downloading forward read for {sample.identifier}...")
+            subprocess.run(
+                ["wget", "-nc", "-P", output_path, sample.forward_read], check=True
+            )
 
-        print(f"Downloading reverse read for {sample.identifier}...")
-        subprocess.run(
-            ["wget", "-nc", "-P", output_path, sample.reverse_read], check=True
-        )
+        if sample.reverse_read:
+            print(f"Downloading reverse read for {sample.identifier}...")
+            subprocess.run(
+                ["wget", "-nc", "-P", output_path, sample.reverse_read], check=True
+            )
 
-        print(f"Finished downloading {sample.identifier}")
+            print(f"Finished downloading {sample.identifier}")
     except subprocess.CalledProcessError as e:
         print(f"Download failed for {sample.identifier}: {e}")
 
